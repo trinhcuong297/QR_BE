@@ -31,7 +31,7 @@ db_Connect().catch((err) => console.log(err));
 
 //odoo connect
 try {
-	await odoo.connect();
+	odoo.connect();
 }
 catch (err) {
 	console.log(err)
