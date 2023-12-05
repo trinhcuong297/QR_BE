@@ -15,7 +15,7 @@ GetTask
             console.log(allTask)
             const allUser = await odoo.read("hr.employee", [...Array(100).keys()].map(i => i + 1), ["name", "work_email"])
             const User = await allUser.find((e) => { return e.work_email == req.params.user })
-            const myTask = await allTask.filter((e) => { return e.portal_user_names.includes(User?.name) })
+            const myTask = await allTask.filter((e) => { return e.portal_user_names.includes(User.name) })
 
             return res.status(200).json(myTask)
         }
