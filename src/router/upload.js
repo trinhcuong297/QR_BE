@@ -1,6 +1,5 @@
 import multer from "multer";
 import express from "express";
-import sharp from 'sharp';
 import * as fs from 'fs'
 import * as path from 'path'
 import odoo from "../configs/odoo_config.js";
