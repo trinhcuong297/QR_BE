@@ -7,7 +7,7 @@ const Login = express.Router();
 Login
     .post('/', async (req, res) => {
         try {
-            console.log(req.body)
+            console.log(req.body.email, req.body.password)
             const User = await odoo.searchRead("customer.account", ["&", ['email', '=', req.body.email], ['password', '=', req.body.password]])
             return res.status(200).json(User)
         }
