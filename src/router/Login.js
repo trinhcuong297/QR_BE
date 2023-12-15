@@ -8,6 +8,7 @@ Login
     .post('/', async (req, res) => {
         try {
             const User = await odoo.searchRead("customer.account", ["&", ['email', '=', req.body.email], ['password', '=', req.body.password]])
+            console.log("ok")
             return res.status(200).json("User")
         }
         catch {
