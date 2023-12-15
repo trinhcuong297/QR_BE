@@ -1,5 +1,5 @@
 import express from 'express';
-import GetTask from './GetTask.js';
+import GetInfo from './GetInfo.js';
 import Login from './Login.js';
 import GetAllTask from './GetAllTask.js';
 import Upload from './upload.js';
@@ -8,7 +8,7 @@ import Upload from './upload.js';
 const Route = express.Router();
 
 Route
-	.use('/GetTask', GetTask)
+	.use('/GetInfo', GetInfo)
 	.use('/GetAllTask', GetAllTask)
 	.use('/Login', Login)
 	.use('/Upload', Upload)
