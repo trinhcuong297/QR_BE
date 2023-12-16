@@ -3,6 +3,7 @@ import express from "express";
 import * as fs from 'fs'
 import * as path from 'path'
 import odoo from "../configs/odoo_config.js";
+import { fileURLToPath } from "url";
 const Upload = express.Router();
 
 const storage = multer.diskStorage({
@@ -10,7 +11,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname + '---' + Date.now())
+        cb(null, Date.now()+"-"+file.originalname )
     }
 });
 
@@ -24,7 +25,7 @@ Upload
         (req, res, next) => {
             // console.log(req.body)
             // Use multer upload instance
-            multi_upload.array('imgFiles', 5)(req, res, (err) => {
+            multi_upload.array('imgFiles', 1)(req, res, (err) => {
                 if (err) {
                     return res.status(400).json({ error: err.message });
                 }
@@ -66,13 +67,12 @@ Upload
         }
         , async function (req, res, next) {
             try {
-                await odoo.create("account.analytic.line", {
-                    // date: `${new Date().toISOString().slice(0, 10)}`,
-                    employee_id: Number(req.body.user_id),
-                    unit_amount: 1,
-                    project_id: Number(req.body.project_id),
-                    date: `${new Date().toISOString().slice(0, 10)}`,
-                    name: `${req.body.task} := ${req.body.error ? "ERROR" + req.body.error : ""} ______ ${req.files.map((e) => e.path).join("______")} ======== Time submit:${new Date().toISOString()}`
+                await odoo.create("customer.error", {
+                    user_id: Number(req.body.user_id),
+                    errLocation: req.body.errLocation,
+                    desc: req.body.desc,
+                    imgURL: `<a href="${req.files.map((e) => "https://vvcqr.io.vn/"+e.path.slice(8))}">Xem</a>`,
+                    status: "err"
                 })
                 return res.status(200).json("OK")
             }

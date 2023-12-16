@@ -31,11 +31,13 @@ db_Connect().catch((err) => console.log(err));
 
 //odoo connect
 try {
-	odoo.connect();
+	await odoo.connect();
 }
 catch (err) {
 	console.log(err)
 }
+
+app.use(express.static('uploads'))
 
 //root api
 app
