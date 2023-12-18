@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import odoo from "../configs/odoo_config.js";
 import { fileURLToPath } from "url";
+import { error } from "console";
 const Upload = express.Router();
 
 const storage = multer.diskStorage({
@@ -23,7 +24,6 @@ const multi_upload = multer({
 Upload
     .post('/',
         (req, res, next) => {
-            // console.log(req.body)
             // Use multer upload instance
             multi_upload.array('imgFiles', 2)(req, res, (err) => {
                 if (err) {
@@ -54,7 +54,7 @@ Upload
                     files.forEach((file) => {
                         fs.unlinkSync(file.path);
                     });
-
+                    console.log(error)
                     return res.status(400).json({ errors });
                 }
 
