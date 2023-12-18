@@ -38,7 +38,7 @@ Upload
 
                 // Validate file types and sizes
                 files.forEach((file) => {
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg','image'];
                     const maxSize = 5 * 1024 * 1024; // 5MB
 
                     if (!allowedTypes.includes(file.mimetype)) {
