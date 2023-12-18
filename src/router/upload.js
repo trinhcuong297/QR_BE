@@ -25,7 +25,7 @@ Upload
     .post('/',
         (req, res, next) => {
             // Use multer upload instance
-            multi_upload.array('imgFiles', 2)(req, res, (err) => {
+            multi_upload.array('imgFiles', 1)(req, res, (err) => {
                 if (err) {
                     console.log(err)
                     return res.status(400).json({ error: err.message });
@@ -33,6 +33,7 @@ Upload
 
                 // Retrieve uploaded files
                 const files = req.files;
+                console.log(files)
                 const errors = [];
 
                 // Validate file types and sizes
