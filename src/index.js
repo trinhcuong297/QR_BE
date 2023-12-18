@@ -51,7 +51,7 @@ app
 			console.log('Request has timed out.');
 			res.send(408);
 		});
-
+		console.log("a call")
 		next();
 	})
 	.use('/', Route);
