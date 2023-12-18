@@ -25,7 +25,6 @@ Upload
     .post('/',
         (req, res, next) => {
             // Use multer upload instance
-            console.log('upload')
             multi_upload.array('imgFiles', 2)(req, res, (err) => {
                 if (err) {
                     console.log(err)
@@ -40,6 +39,7 @@ Upload
                 files.forEach((file) => {
                     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
                     const maxSize = 5 * 1024 * 1024; // 5MB
+
                     if (!allowedTypes.includes(file.mimetype)) {
                         errors.push(`Invalid file type: ${file.originalname}`);
                     }
@@ -48,7 +48,6 @@ Upload
                         errors.push(`File too large: ${file.originalname}`);
                     }
                 });
-                console.log(errors)
 
                 // Handle validation errors
                 if (errors.length > 0) {
@@ -56,6 +55,7 @@ Upload
                     files.forEach((file) => {
                         fs.unlinkSync(file.path);
                     });
+                    console.log(error)
                     return res.status(400).json({ errors });
                 }
 
@@ -63,6 +63,7 @@ Upload
                 req.files = files;
 
                 // Proceed to the next middleware or route handler
+                console.log(req.files)
                 next();
             });
         }
