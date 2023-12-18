@@ -25,7 +25,7 @@ Upload
         (req, res, next) => {
             // console.log(req.body)
             // Use multer upload instance
-            multi_upload.array('imgFiles', 1)(req, res, (err) => {
+            multi_upload.array('imgFiles', 2)(req, res, (err) => {
                 if (err) {
                     return res.status(400).json({ error: err.message });
                 }
