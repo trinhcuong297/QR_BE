@@ -26,46 +26,46 @@ Upload
         (req, res, next) => {
             // Use multer upload instance
             multi_upload.array('imgFiles', 1)(req, res, (err) => {
-                if (err) {
-                    console.log(err)
-                    return res.status(400).json({ error: err.message });
-                }
+                // if (err) {
+                //     console.log(err)
+                //     return res.status(400).json({ error: err.message });
+                // }
 
-                // Retrieve uploaded files
-                const files = req.files;
-                console.log(files)
-                const errors = [];
+                // // Retrieve uploaded files
+                // const files = req.files;
+                // console.log(files)
+                // const errors = [];
 
-                // Validate file types and sizes
-                files.forEach((file) => {
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg','image'];
-                    const maxSize = 5 * 1024 * 1024; // 5MB
+                // // Validate file types and sizes
+                // files.forEach((file) => {
+                //     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg','image'];
+                //     const maxSize = 5 * 1024 * 1024; // 5MB
 
-                    if (!allowedTypes.includes(file.mimetype)) {
-                        errors.push(`Invalid file type: ${file.originalname}`);
-                    }
+                //     if (!allowedTypes.includes(file.mimetype)) {
+                //         errors.push(`Invalid file type: ${file.originalname}`);
+                //     }
 
-                    if (file.size > maxSize) {
-                        errors.push(`File too large: ${file.originalname}`);
-                    }
-                });
+                //     if (file.size > maxSize) {
+                //         errors.push(`File too large: ${file.originalname}`);
+                //     }
+                // });
 
-                // Handle validation errors
-                if (errors.length > 0) {
-                    // Remove uploaded files
-                    files.forEach((file) => {
-                        fs.unlinkSync(file.path);
-                    });
-                    console.log(error)
-                    return res.status(400).json({ errors });
-                }
+                // // Handle validation errors
+                // if (errors.length > 0) {
+                //     // Remove uploaded files
+                //     files.forEach((file) => {
+                //         fs.unlinkSync(file.path);
+                //     });
+                //     console.log(error)
+                //     return res.status(400).json({ errors });
+                // }
 
-                // Attach files to the request object
-                req.files = files;
+                // // Attach files to the request object
+                // req.files = files;
 
-                // Proceed to the next middleware or route handler
-                console.log(req.files)
-                next();
+                // // Proceed to the next middleware or route handler
+                // console.log(req.files)
+            next();
             });
         }
         , async function (req, res, next) {
